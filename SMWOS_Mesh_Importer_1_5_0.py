@@ -742,4 +742,5 @@ def register():
 def unregister():
     bpy.types.TOPBAR_MT_file_import.remove(menu_fn)
     bpy.utils.unregister_class(IMPORT_OT_smwos)
+
 if __name__=="__main__": register()
