@@ -1,4 +1,4 @@
-# author: haru233 (haruse31/haruse#31)
+# author: haru233
 
 from inc_noesis import *
 import struct
@@ -612,5 +612,6 @@ def WriteModel(mdl, bs):
 
                 for idx in mesh._cleaned_strip:
                     out.write(struct.pack("<H", idx))
+
 
     return 1
