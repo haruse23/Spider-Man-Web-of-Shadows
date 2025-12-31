@@ -106,7 +106,7 @@ def extract_pcpack(
             if not force and os.path.exists(dst):
                 if not quiet:
                     print(f"[SKIP] exists: {dst}")
-                    skipped = True
+                skipped = True
 
             if not skipped:
                 with open(dst, "wb") as f:
@@ -117,28 +117,26 @@ def extract_pcpack(
             if with_pcapk and e.fileExt == "pcapk":
                 try:
                     apk_archive = pcapk.APKFArchive(e.data)
-                    # Only process mesh files
                     for file_obj in apk_archive.files():
-                        if file_obj.fileType.lower() in ["mesh", "rvb_mesh", "skelmesh"]:  # adjust types as needed
-                            standalone_bytes = pcapk.createStandaloneFile(file_obj)
+                        standalone_bytes = pcapk.createStandaloneFile(file_obj)
+                        standalone_name = f"{file_obj.filenameHash}.{file_obj.filename}.standalone"
+                        
+                        if file_obj.fileType == "MESH":
                             standalone_name = f"{file_obj.filenameHash}.{file_obj.filename}.standalone_mesh"
-                            standalone_path = os.path.join(out_dir, standalone_name)
-                            with open(standalone_path, "wb") as f:
-                                f.write(standalone_bytes)
-                            if not quiet:
-                                print(f"[STANDALONE CREATED] {standalone_path}")
+                            
+                        standalone_path = os.path.join(out_dir, standalone_name)
+                        with open(standalone_path, "wb") as f:
+                            f.write(standalone_bytes)
+                        if not quiet:
+                            print(f"[STANDALONE CREATED] {standalone_path}")
                 except Exception as ex:
                     if not quiet:
                         print(f"[ERROR] Failed to create standalone for {out_name}: {ex}")
-
-
-
-
     except Exception as ex:
         import traceback
-
         print(traceback.format_exc())
         sys.exit(f"Error extracting {file_path}: {ex}")
+
 
 def scan_pcpack_files(input_path: str):
     if os.path.isdir(input_path):
