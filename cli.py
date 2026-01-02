@@ -119,10 +119,8 @@ def extract_pcpack(
                     apk_archive = pcapk.APKFArchive(e.data)
                     for file_obj in apk_archive.files():
                         standalone_bytes = pcapk.createStandaloneFile(file_obj)
-                        standalone_name = f"{file_obj.filenameHash}.{file_obj.filename}.standalone"
-                        
-                        if file_obj.fileType == "MESH":
-                            standalone_name = f"{file_obj.filenameHash}.{file_obj.filename}.standalone_mesh"
+                        standalone_name = f"{file_obj.filenameHash}.{file_obj.filename}.standalone_{(file_obj.fileType).lower()}"
+                     
                             
                         standalone_path = os.path.join(out_dir, standalone_name)
                         with open(standalone_path, "wb") as f:
