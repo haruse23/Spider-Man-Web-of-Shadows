@@ -1,7 +1,7 @@
 # Spider-Man-Web-of-Shadows
 Tools for the video-game Spider-Man: Web of Shadows
 
-Use the provided `cli.py` and `pcapk.py` files in this repository instead of the original ones along with the `CLI Tool` to generate `.standalone_[filetype]` filesf from the `PCPACK` file
+Use the provided `cli.py` and `pcapk.py` files in this repository instead of the original ones along with the `CLI Tool` to generate `.standalone_[filetype]` files from the `PCPACK` file
 
 `CLI Tool`:
 https://github.com/kirbystealer/WebOfShadowsTools/blob/master/python
